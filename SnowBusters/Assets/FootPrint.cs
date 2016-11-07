@@ -100,6 +100,7 @@ public class FootPrint : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20, 1 << LayerMask.NameToLayer("SnowPlane")) != true)
         {
+            Debug.Log("hogehoge");
             return;   // 地面が見つからず?
         }
         //Debug.LogFormat("tex = {0}, {1}", hit.textureCoord.x, hit.textureCoord.y);
@@ -107,14 +108,14 @@ public class FootPrint : MonoBehaviour
         var tx = (int)(hit.textureCoord.x * DisplacementTexture.width);
         var ty = (int)(hit.textureCoord.y * DisplacementTexture.height);
         AccumulateSnowAdd(tx, ty, AccumulatePower);
-        AccumulateSnowAdd(tx + 1, ty, AccumulatePower / 2.0f);
-        AccumulateSnowAdd(tx, ty + 1, AccumulatePower / 2.0f);
-        AccumulateSnowAdd(tx - 1, ty, AccumulatePower / 2.0f);
-        AccumulateSnowAdd(tx, ty - 1, AccumulatePower / 2.0f);
-        AccumulateSnowAdd(tx + 1, ty + 1, AccumulatePower / 4.0f);
-        AccumulateSnowAdd(tx - 1, ty + 1, AccumulatePower / 4.0f);
-        AccumulateSnowAdd(tx + 1, ty - 1, AccumulatePower / 4.0f);
-        AccumulateSnowAdd(tx - 1, ty - 1, AccumulatePower / 4.0f);
+        AccumulateSnowAdd(tx + 1, ty, AccumulatePower / 1.5f);
+        AccumulateSnowAdd(tx, ty + 1, AccumulatePower / 1.5f);
+        AccumulateSnowAdd(tx - 1, ty, AccumulatePower / 1.5f);
+        AccumulateSnowAdd(tx, ty - 1, AccumulatePower / 1.5f);
+        AccumulateSnowAdd(tx + 1, ty + 1, AccumulatePower / 2.0f);
+        AccumulateSnowAdd(tx - 1, ty + 1, AccumulatePower / 2.0f);
+        AccumulateSnowAdd(tx + 1, ty - 1, AccumulatePower / 2.0f);
+        AccumulateSnowAdd(tx - 1, ty - 1, AccumulatePower / 2.0f);
         IsUpdateDisplacementTexture = true;
     }
 
@@ -139,18 +140,20 @@ public class FootPrint : MonoBehaviour
     /// <param name="collision"></param>
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name != "Foot")
+        if (collision.gameObject.tag != "Player")
         {
             return;
         }
         if (collision.contacts == null) return;
         if (collision.contacts.Length <= 0) return;
+        Debug.Log(collision.gameObject.name);
 
         // Rayを飛ばしUV値を取得
         Ray ray = new Ray(collision.contacts[0].point + Vector3.up, Vector3.down);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 2, 1 << LayerMask.NameToLayer("SnowPlane")) != true)
         {
+            Debug.Log("hoge");
             return;   // 地面が見つからず?
         }
 

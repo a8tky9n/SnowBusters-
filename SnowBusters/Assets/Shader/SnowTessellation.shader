@@ -1,6 +1,6 @@
 ﻿Shader "Custom/SnowTessellation" {
 	Properties{
-		_EdgeLength("Edge length", Range(2,50)) = 15
+		_Tess("Tessellation", Range(1,100)) = 4
 		_MainTex("Base (RGB)", 2D) = "white" {}
 	_DispTex("Disp Texture", 2D) = "gray" {}
 	_NormalMap("Normalmap", 2D) = "bump" {}
@@ -13,9 +13,8 @@
 		LOD 300
 
 		CGPROGRAM
-#pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp tessellate:tessEdge nolightmap
+#pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp tessellate:tessFixed nolightmap
 #pragma target 5.0
-#include "Tessellation.cginc"
 
 	struct appdata {
 		float4 vertex : POSITION;
@@ -24,11 +23,11 @@
 		float2 texcoord : TEXCOORD0;
 	};
 
-	float _EdgeLength;
+	float _Tess;
 
-	float4 tessEdge(appdata v0, appdata v1, appdata v2)
+	float4 tessFixed()
 	{
-		return UnityEdgeLengthBasedTess(v0.vertex, v1.vertex, v2.vertex, _EdgeLength);
+		return _Tess;
 	}
 
 	sampler2D _DispTex;
