@@ -100,8 +100,10 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+    
     void UpdateAnimator(Vector3 move)
     {
+
         // update the animator parameters
         Anim.SetFloat("Forward", ForwardAmount, 0.1f, Time.deltaTime);
         Anim.SetFloat("Turn", TurnAmount, 0.1f, Time.deltaTime);
@@ -136,6 +138,7 @@ public class PlayerManager : MonoBehaviour
             Anim.speed = 1;
         }
     }
+    
     void HandleAirborneMovement()
     {
         // apply extra gravity from multiplier:
