@@ -148,7 +148,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
             if (collision.contacts == null) return;
             if (collision.contacts.Length <= 0) return;
-            Debug.Log(collision.gameObject.name);
+            //Debug.Log(collision.gameObject.name);
 
             // Rayを飛ばしUV値を取得
             Ray ray = new Ray(collision.contacts[0].point + Vector3.up, Vector3.down);
