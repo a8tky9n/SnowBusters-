@@ -13,6 +13,8 @@ public class ThrowSnowBall : MonoBehaviour {
     public GameObject Projectile;
     //自分の座標
     private Transform myTransform;
+    //プレイヤーのクラス
+    Player Player_;
 
     void Awake()
     {
@@ -21,12 +23,13 @@ public class ThrowSnowBall : MonoBehaviour {
 
     void Start()
     {
-       // StartCoroutine(SimulateProjectile());
+        Player_ = GameObject.Find("yukinnko3").GetComponent<Player>();
     }
     void Update()
     {
-        if(Input.GetMouseButtonUp(0)){
+        if(Input.GetMouseButtonUp(0)&&Player_.SnowBall>0){
             StartCoroutine(SimulateProjectile());
+            Player_.SnowBallProcess(-1);
         }
         if(Input.GetAxisRaw("Mouse ScrollWheel") != 0){
             if (firingAngle > 5 && firingAngle < 90)

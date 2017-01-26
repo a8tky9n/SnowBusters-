@@ -42,11 +42,16 @@ public class PlayerInput : MonoBehaviour
     // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
-        // read inputs
-        float h = CrossPlatformInputManager.GetAxis("Horizontal");
-        float v = CrossPlatformInputManager.GetAxis("Vertical");
-        bool crouch = Input.GetKey(KeyCode.C);
-
+        float h = 0;
+        float v = 0;
+        bool crouch = false;
+        if (!Input.GetMouseButton(0))
+        {
+            // read inputs
+            h = CrossPlatformInputManager.GetAxis("Horizontal");
+            v = CrossPlatformInputManager.GetAxis("Vertical");
+            crouch = Input.GetKey(KeyCode.C);
+        }
         // calculate move direction to pass to character
         if (m_Cam != null)
         {
@@ -68,6 +73,7 @@ public class PlayerInput : MonoBehaviour
         Character.Move(m_Move, crouch, m_Jump);
         m_Jump = false;
         //Debug.Log(m_Move);
+
     }
     public Vector3 GetMove()
     {

@@ -102,7 +102,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 20, 1 << LayerMask.NameToLayer("SnowPlane")) != true)
             {
-                Debug.Log("hogehoge");
+                //Debug.Log("hogehoge");
                 return;   // 地面が見つからず?
             }
             //Debug.LogFormat("tex = {0}, {1}", hit.textureCoord.x, hit.textureCoord.y);
