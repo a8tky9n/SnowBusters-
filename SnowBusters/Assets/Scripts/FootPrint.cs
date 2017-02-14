@@ -196,7 +196,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         }
         void OnCollisionStay(Collision collision)
         {
-            if (collision.gameObject.tag != "Player")
+            if ((collision.gameObject.tag != "Player"))
             {
                 return;
             }

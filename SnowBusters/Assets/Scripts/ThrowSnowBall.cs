@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ThrowSnowBall : MonoBehaviour {
     //ターゲットの座標
@@ -77,10 +78,15 @@ public class ThrowSnowBall : MonoBehaviour {
 
         while (elapse_time < flightDuration)
         {
-            proj.transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
+            try {
+                proj.transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
 
-            elapse_time += Time.deltaTime;
+                elapse_time += Time.deltaTime;
+            }
+            catch (MissingReferenceException)
+            {
 
+            }
             yield return null;
         }
     }
